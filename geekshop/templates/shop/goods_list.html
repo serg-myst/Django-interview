@@ -1,0 +1,29 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>Каталог товаров</h2>
+
+<a href="{% url 'shop:create_product' %}" class="btn btn-primary">Добавить товар</a>
+
+{% for product in products %}
+
+<div class="card text-center">
+  <div class="card-header">
+    {{ product.name }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ product.full_name }}</h5>
+    <p class="card-text">Цена: {{ product.price }} руб.</p>
+    <p class="card-text">Описание: {{ product.description }}</p>
+    <a href="#" class="btn btn-primary">Подробно о товаре</a>
+  </div>
+  <div class="card-footer text-muted">
+    Дата поступления: {{ product.receipt_date|date:"d.m.Y" }}
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
