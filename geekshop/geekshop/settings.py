@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'shop.apps.ShopConfig',
+    'hitcount',
 
 ]
+
+# from hitcount.middleware import hit_count_middleware
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'hitcount.middleware.hit_count_middleware',
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
