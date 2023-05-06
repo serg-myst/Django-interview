@@ -12,9 +12,17 @@
             {% include "shop/includes/form.html" %}
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button type="button" id="close-btn" class="btn btn-default" data-dismiss="modal">Закрыть</button>
             <button type="submit" class="btn btn-primary">Создать</button>
         </div>
     </form>
 </div>
 {% endblock content %}
+
+<script>
+$(document).ready ( function(){
+ let closeBtn = document.getElementById("close-btn");
+ closeBtn.addEventListener('click',function() {
+ $("#modal-good").modal("hide");
+ });
+ });

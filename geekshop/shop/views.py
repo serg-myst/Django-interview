@@ -11,7 +11,25 @@ class ShopHome(ListView):
     model = Product
     template_name = 'shop/goods_list.html'
     context_object_name = 'products'
-    allow_empty = False
+    allow_empty = True
+
+
+class ShopCat(ListView):
+    model = Product
+    template_name = 'shop/goods_list.html'
+    context_object_name = 'products'
+    allow_empty = True
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.select_related('cat').filter(cat__id=self.kwargs['pk'])
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cat_selected'] = self.kwargs['pk']
+        context = context
+        return context
 
 
 '''
@@ -23,7 +41,7 @@ class ProductCreateView(CreateView):
     success_url = '/'
 
     # Здесь можно что-то добавить в создаваемый объект
-    
+
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.save()

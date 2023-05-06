@@ -36,6 +36,7 @@ $("#modal-good .modal-content").html(data.html_form);
 });
 return false;
 };
+
 /* Подключение функций */
 $(".js-create-good").click(loadForm);
 $("#modal-good").on("submit", ".js-good-create-form", saveForm);

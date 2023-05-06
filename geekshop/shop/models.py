@@ -64,7 +64,7 @@ class Product(models.Model):
     receipt_date = models.DateField(blank=True, null=True, verbose_name='Дата поступления')
     unit_measure = models.ForeignKey(UnitMeasure, on_delete=models.CASCADE, verbose_name='Ед. изм.')
     supplier = models.ForeignKey(Supplier, null=True, on_delete=models.CASCADE, verbose_name='Поставщик')
-    tags = models.ManyToManyField(Tag, verbose_name='Разделы', blank=True, null=True, related_name='products')
+    tags = models.ManyToManyField(Tag, verbose_name='Разделы', blank=True, through='Producttags')
 
     def __str__(self):
         return f'({self.pk}) {self.name}'
@@ -73,3 +73,15 @@ class Product(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
         ordering = ('name',)
+
+
+class ProductTags(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'({self.product}) {self.tag}'
+
+    class Meta:
+        verbose_name = 'Разделы товаров'
+        verbose_name_plural = 'Разделы товаров'

@@ -1,0 +1,17 @@
+{% load product_tags %}
+
+<header class="header blurred-container sticky-top">
+
+    <nav class="navbar navbar-expand-lg position-relative">
+        <div class="container position-relative">
+            <a class="navbar-brand" href="{% url 'shop:home' %}"></a>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+
+                {% categories cat_selected %}
+
+            </div>
+        </div>
+    </nav>
+
+</header>
