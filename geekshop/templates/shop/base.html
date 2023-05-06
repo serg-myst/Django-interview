@@ -8,7 +8,7 @@
 
     <title>
         {% block title %}
-            GEEK-SHOP
+        GEEK-SHOP
         {% endblock %}
     </title>
 
@@ -19,17 +19,35 @@
 <body>
 <div class="wrapper">
 
+    {% include 'shop/includes/_header.html' %}
+
     <!-- основное содержимое -->
     <div class="container mt-5">
         <div class="row row-main">
 
             <!-- контент -->
-            <div id="cards" class="col-md-9 row g-4">
-                {% block content %}
-                {% endblock %}
-            </div>
+
+            <h2>Каталог товаров</h2>
+
+            <span>
+                 <button type="button" class="js-create-good btn btn-primary"
+                         data-url="{% url 'shop:create_product' %}">Создать товар</button>
+                </span>
+
+            {% block content %}
+            {% endblock %}
 
         </div>
     </div>
 
+    {% include 'shop/includes/_footer.html' %}
+
 </div>
+
+<script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/script_create_product.js' %}"></script>
+
+</body>
+
+</html>
