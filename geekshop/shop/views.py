@@ -6,12 +6,27 @@ from shop.forms import ProductForm
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
+# Урок 3 метод получения текущего сайта из настроек
+from django.contrib.sites.shortcuts import get_current_site
+
 
 class ShopHome(ListView):
     model = Product
     template_name = 'shop/goods_list.html'
     context_object_name = 'products'
+
+    # Для автоматической фильтрации по сайтам переопределим запрос
+    # queryset = Product.on_site.all()  # используем on_site вместо стандартного менеджера objects
+    queryset = Product.objects.all()  # используем on_site вместо стандартного менеджера objects
+    # queryset = Product.objects.not_deleted().all()  # используем not_deleted() вместо стандартного менеджера objects
+
     allow_empty = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['SITE_ID'] = get_current_site(request=self.request)
+        context = context
+        return context
 
 
 class ShopCat(ListView):

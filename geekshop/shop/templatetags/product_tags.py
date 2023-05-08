@@ -14,5 +14,5 @@ def get_product_tags(product):
 
 @register.inclusion_tag('shop/includes/_categories.html', name='categories')
 def categories_tags(cat_selected=None):
-    categories = Category.objects.all()
+    categories = Category.on_site.all()
     return {'categories': categories, 'cat_selected': cat_selected}

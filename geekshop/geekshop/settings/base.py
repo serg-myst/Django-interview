@@ -13,24 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Урок 3. После переноса в папку сломается. Добавляем еще один parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wrk$7agr3w%$j831z5@0rr5w3!!(4dm(cups4+dd%-lvf9g&m4'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
-# Для переключения между сайтами ######
-# SITE_ID = 1
-SITE_ID = 2
-#######################################
+# Урок 3. Удаляем все что есть в файлу SETTINGS
 
 # Application definition
 
@@ -166,12 +153,3 @@ STATIC_ROOT = BASE_DIR / 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static/geekshop/',
 ]
-
-
-# Урок 3. Такой себе способ использования настроек. Но... имеет место быть
-'''
-try:
-    from .local_settings import *
-except ImportError:
-    pass
-'''

@@ -1,10 +1,13 @@
 {% load product_tags %}
 
+<h2>Текущий сайт: {{ SITE_ID }}</h2>
+
 {% for product in products %}
 
 <div class="card text-center">
     <div class="card-header">
         {{ product.name }}
+        <span class="card-text">{{ product.site }}</span>
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ product.full_name }}</h5>
