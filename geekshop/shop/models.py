@@ -52,6 +52,8 @@ class Supplier(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True, verbose_name="Категория", db_index=True)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, null=True)
+    on_site = CurrentSiteManager('site')  # Для связи модели с сайтом
 
     def __str__(self):
         return self.name
