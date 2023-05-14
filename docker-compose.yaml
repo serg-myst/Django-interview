@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13.7
+    privileged: true
+    restart: always
+    ports:
+      - '54325:5432'
+    environment:
+      POSTGRES_DB: geekshop
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: qwerty
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data/
+
+  backend:
+    build:
+      context: ./geekshop
+    privileged: true
+    restart: always
+    expose:
+      - 8000
+    command: bash -c "
+      python manage.py migrate &&
+      gunicorn geekshop.wsgi -b 0.0.0.0:8000
+      "
+    environment:
+      DJANGO_SETTINGS_MODULE: geekshop.settings
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 8002:8002
+    depends_on:
+      - backend
+
+
