@@ -86,6 +86,8 @@ class Product(models.Model):
     unit_measure = models.ForeignKey(UnitMeasure, on_delete=models.CASCADE, verbose_name='Ед. изм.')
     supplier = models.ForeignKey(Supplier, null=True, on_delete=models.CASCADE, verbose_name='Поставщик')
     tags = models.ManyToManyField(Tag, verbose_name='Разделы', blank=True, through='Producttags')
+    # Картинки
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name='Фото товара', blank=True)
     site = models.ForeignKey(Site, on_delete=models.CASCADE, null=True)
     # on_site = CurrentSiteManager('site')  # Для связи модели с сайтом
     deleted = models.BooleanField(default=False, null=False)  # Для тестирования кастомного менеджера запросов

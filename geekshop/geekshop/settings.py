@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-wrk$7agr3w%$j831z5@0rr5w3!!(4dm(cups4+dd%-lvf9g&m4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -96,10 +96,24 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+'''
+
+#  Подключаем базу POSTGRES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'geekshop',
+        'USER': 'root',
+        'PASSWORD': 'qwerty',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -162,10 +176,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static/geekshop/',
+    BASE_DIR / 'templates',
 ]
+STATIC_ROOT = BASE_DIR / '..' / 'nginx' / 'static'
 
 
 # Урок 3. Такой себе способ использования настроек. Но... имеет место быть
